@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Tresor Ruth 💝</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd4e9 100%);
+            min-height: 100vh;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: floatHeart 15s infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.8;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Letter Scene */
+        #letter-scene {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            opacity: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        #letter-scene.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .letter-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.3);
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+            animation: fadeInScale 1s ease;
+            border: 3px solid #ffb6d9;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .letter-header h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .letter-date {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            color: #999;
+        }
+
+        .letter-body {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .letter-body p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .letter-signature {
+            text-align: right;
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #e91e63;
+            margin-top: 30px;
+        }
+
+        .continue-btn {
+            display: block;
+            margin: 30px auto 0;
+            padding: 15px 50px;
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.6);
+        }
+
+        /* Question Scene */
+        #question-scene {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        #question-scene.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .question-container {
+            text-align: center;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 70px rgba(255, 105, 180, 0.4);
+            max-width: 600px;
+            width: 100%;
+            border: 4px solid #ffb6d9;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 25px 70px rgba(255, 105, 180, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 25px 70px rgba(255, 105, 180, 0.7);
+            }
+        }
+
+        .question-container h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #e91e63;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .question-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 56px;
+            color: #ff6b9d;
+            display: block;
+            margin: 20px 0;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .answer-btn {
+            padding: 20px 60px;
+            font-size: 24px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #e91e63 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.5);
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.7);
+        }
+
+        .no-btn {
+            background: #f0f0f0;
+            color: #666;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: absolute;
+        }
+
+        /* Celebration Scene */
+        #celebration-scene {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        #celebration-scene.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .celebration-container {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .celebration-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 72px;
+            color: #e91e63;
+            margin-bottom: 30px;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .celebration-message {
+            font-size: 28px;
+            color: #ff6b9d;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* Photo Carousel */
+        .carousel-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.4);
+            margin-bottom: 30px;
+            border: 3px solid #ffb6d9;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffeef8;
+        }
+
+        .carousel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #ffd4e9 0%, #ffb6d9 100%);
+            color: #e91e63;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .carousel-btn {
+            background: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-btn:hover {
+            background: #ff6b9d;
+            transform: scale(1.05);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #e91e63;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #e91e63;
+            position: absolute;
+            animation: confettiFall 3s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Heart Explosion */
+        .heart-explosion {
+            position: fixed;
+            font-size: 30px;
+            pointer-events: none;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .letter-container {
+                padding: 30px 25px;
+            }
+
+            .letter-header h1 {
+                font-size: 36px;
+            }
+
+            .question-container h2 {
+                font-size: 32px;
+            }
+
+            .question-name {
+                font-size: 42px;
+            }
+
+            .answer-btn {
+                padding: 15px 40px;
+                font-size: 20px;
+            }
+
+            .celebration-title {
+                font-size: 48px;
+            }
+
+            .celebration-message {
+                font-size: 22px;
+            }
+
+            .carousel-item {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Audio -->
+    <audio id="celebrationAudio" autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <!-- Letter Scene -->
+    <section id="letter-scene">
+        <div class="letter-container">
+            <div class="letter-header">
+                <h1>My Loving Ruth</h1>
+                <p class="letter-date">A Letter From My Heart</p>
+            </div>
+
+            <div class="letter-body">
+                <p>My Beautiful Ruth❤️❤️❤️❤️,</p>
+
+                <p>From the moment I met you, my world changed in the most wonderful way. Your smile brightens even my
+                    darkest days, and your laugh is the sweetest melody I've ever heard. Every moment we spend together
+                    feels like a dream I never want to wake up from.</p>
+
+                <p>You have this incredible way of making me feel like the luckiest person alive. When I'm with you,
+                    everything just feels right. The way you understand me, support me, and make me want to be a better
+                    person—it's something I've never experienced before.</p>
+
+                <p>I find myself thinking about you constantly. The little things you do, the way your eyes light up
+                    when you talk about something you love, the warmth of your hand in mine—these are the moments I
+                    treasure most.</p>
+
+                <p>I know we've shared so many beautiful memories already, but I want to create a million more with you.
+                    I want to be there for you through every adventure, every challenge, and every joy that life brings.
+                </p>
+
+                <p>So today, nina jambo la kukuuliza madam...</p>
+            </div>
+
+            <div class="letter-signature">
+                Forever Yours,<br>
+                Alasiri ❤️
+            </div>
+
+            <button class="continue-btn" onclick="showQuestion()">Continue ➜</button>
+        </div>
+    </section>
+
+    <!-- Question Scene -->
+    <section id="question-scene">
+        <div class="question-container">
+            <h2>
+                Will You Be My Valentine,
+                <span class="question-name">Ruth?</span>
+            </h2>
+            <div class="button-container" id="buttonContainer">
+                <button class="answer-btn yes-btn" onclick="celebrate()">YES! 💕</button>
+                <button class="answer-btn no-btn" id="noBtn">No</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="celebration-scene"
+        style="padding:60px 20px; background:linear-gradient(135deg,#ffdde1,#ee9ca7); text-align:center; overflow:hidden;">
+        <div class="celebration-container" style="max-width:900px; margin:auto; position:relative;">
+
+            <h1 class="celebration-title" style="font-size:3rem; color:#fff; margin-bottom:10px;">
+                She Said YES! 🎉
+            </h1>
+
+            <p class="celebration-message" style="font-size:1.2rem; color:#fff; margin-bottom:40px;">
+                The start of our beautiful journey together! 💝
+            </p>
+
+            <div class="carousel-container" style="position:relative; width:100%; overflow:hidden;">
+                <div class="carousel" style="width:100%;">
+                    <div class="carousel-inner" id="carouselInner"
+                        style="display:flex; transition:transform 1s ease-in-out;">
+
+                        <div class="carousel-item" style="min-width:100%;">
+                            <img src="her.jpg"
+                                style="width:100%; height:auto; max-height:500px; object-fit:contain; border-radius:12px; animation:zoom 20s ease-in-out infinite;">
+                        </div>
+
+                        <div class="carousel-item" style="min-width:100%;">
+                            <img src="pic1.jpg"
+                                style="width:100%; height:auto; max-height:500px; object-fit:contain; border-radius:12px; animation:zoom 20s ease-in-out infinite;">
+                        </div>
+
+                        <div class="carousel-item" style="min-width:100%;">
+                            <img src="pic2.jpg"
+                                style="width:100%; height:auto; max-height:500px; object-fit:contain; border-radius:12px; animation:zoom 20s ease-in-out infinite;">
+                        </div>
+
+                        <div class="carousel-item" style="min-width:100%;">
+                            <img src="pic3.jpg"
+                                style="width:100%; height:auto; max-height:500px; object-fit:contain; border-radius:12px; animation:zoom 20s ease-in-out infinite;">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inline CSS for Ken Burns Zoom -->
+        <style>
+            @keyframes zoom {
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.05);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+        </style>
+
+        <!-- Auto Slide Script -->
+        <script>
+            const carouselInner = document.getElementById("carouselInner");
+            const slides = carouselInner.children.length;
+            let currentIndex = 0;
+
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides;
+                carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }, 4000); // Slide every 4 seconds
+
+            // Ensure audio plays even on browsers that block autoplay
+            window.addEventListener("click", () => {
+                const audio = document.getElementById("celebrationAudio");
+                if (audio.paused) audio.play();
+            }, { once: true });
+        </script>
+    </section>
+
+
+    <script>
+        // Floating Hearts Background
+        function createFloatingHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💕';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+        // Create hearts periodically
+        setInterval(createFloatingHeart, 800);
+
+        // Initialize some hearts
+        for (let i = 0; i < 10; i++) {
+            setTimeout(createFloatingHeart, i * 300);
+        }
+
+        // Show Question Scene
+        function showQuestion() {
+            const letterScene = document.getElementById('letter-scene');
+            const questionScene = document.getElementById('question-scene');
+
+            letterScene.classList.add('hidden');
+            setTimeout(() => {
+                letterScene.style.display = 'none';
+                questionScene.classList.add('active');
+                initNoButton();
+            }, 800);
+        }
+
+        // No Button Escape Logic
+        function initNoButton() {
+            const noBtn = document.getElementById('noBtn');
+            const buttonContainer = document.getElementById('buttonContainer');
+
+            noBtn.addEventListener('mouseenter', () => {
+                const containerRect = buttonContainer.getBoundingClientRect();
+                const btnRect = noBtn.getBoundingClientRect();
+
+                const maxX = window.innerWidth - btnRect.width - 20;
+                const maxY = window.innerHeight - btnRect.height - 20;
+
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            });
+
+            // Mobile touch support
+            noBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+                const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+
+                const randomX = Math.random() * maxX;
+                const randomY = Math.random() * maxY;
+
+                noBtn.style.position = 'fixed';
+                noBtn.style.left = randomX + 'px';
+                noBtn.style.top = randomY + 'px';
+            });
+        }
+
+        // Celebration
+        function celebrate() {
+            const questionScene = document.getElementById('question-scene');
+            const celebrationScene = document.getElementById('celebration-scene');
+
+            // Create heart explosion
+            createHeartExplosion();
+
+            // Create confetti
+            createConfetti();
+
+            questionScene.classList.remove('active');
+            setTimeout(() => {
+                questionScene.style.display = 'none';
+                celebrationScene.classList.add('active');
+                initCarousel();
+            }, 500);
+        }
+
+        // Heart Explosion
+        function createHeartExplosion() {
+            const hearts = ['❤️', '💕', '💖', '💗', '💝', '💘'];
+
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-explosion';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = '50%';
+                    heart.style.top = '50%';
+
+                    const angle = (Math.PI * 2 * i) / 30;
+                    const distance = 200 + Math.random() * 200;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+
+                    heart.style.setProperty('--tx', tx + 'px');
+                    heart.style.setProperty('--ty', ty + 'px');
+
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 1500);
+                }, i * 20);
+            }
+        }
+
+        // Confetti
+        function createConfetti() {
+            const colors = ['#e91e63', '#ff6b9d', '#ffd4e9', '#ffb6d9', '#ff1744', '#f50057'];
+
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // Carousel
+        let currentSlide = 0;
+        const totalSlides = 5;
+
+        function initCarousel() {
+            const indicators = document.getElementById('indicators');
+
+            for (let i = 0; i < totalSlides; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if (i === 0) indicator.classList.add('active');
+                indicator.onclick = () => goToSlide(i);
+                indicators.appendChild(indicator);
+            }
+        }
+
+        function updateCarousel() {
+            const carouselInner = document.getElementById('carouselInner');
+            const indicators = document.querySelectorAll('.indicator');
+
+            carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+    </script>
+</body>
+
+</html>
